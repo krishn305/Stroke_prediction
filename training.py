@@ -283,3 +283,21 @@ kpi_df.to_csv("model_kpi_summary.csv", index=False)
 joblib.dump(best_model, 'stroke_prediction_model.pkl')
 
 model = joblib.load('stroke_prediction_model.pkl')
+# ==============================
+# Deployment-ready simple model
+# ==============================
+
+from sklearn.linear_model import LogisticRegression
+from sklearn.model_selection import train_test_split
+
+features = df[['age', 'hypertension', 'heart_disease', 'avg_glucose_level']]
+target = df['stroke']
+
+X_train, X_test, y_train, y_test = train_test_split(
+    features, target, test_size=0.2, random_state=42
+)
+
+deploy_model = LogisticRegression(max_iter=1000)
+deploy_model.fit(X_train, y_train)
+
+joblib.dump(deploy_model, "stroke_prediction_model.pkl")
