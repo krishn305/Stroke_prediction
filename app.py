@@ -6,7 +6,7 @@ st.set_page_config(page_title="Stroke Prediction", layout="centered")
 
 @st.cache_resource
 def load_model():
-    return joblib.load("best_model.pkl")
+    return joblib.load("stroke_prediction_model.pkl")
 
 model = load_model()
 
