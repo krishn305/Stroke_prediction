@@ -105,6 +105,6 @@ This application is intended for **educational purposes only** and should not be
 ---
 
 ## 👤 Author
-**Krishnapriya karan
+**Krishnapriya karan &
 Priyanka Mallik**  
 AI / ML Enthusiast  
