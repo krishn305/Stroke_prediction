@@ -1,5 +1,2 @@
 streamlit
 numpy
-joblib
-scikit-learn
-imbalanced-learn
