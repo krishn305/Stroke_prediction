@@ -4,7 +4,7 @@ import joblib
 
 # Load model and scaler params
 model = joblib.load("stroke_model.pkl")
-scaler = joblib.load("scaler_params.pkl")
+scaler = joblib.load("scaler.pkl")
 
 mean = scaler["mean"]
 std = scaler["std"]
