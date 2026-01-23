@@ -2,27 +2,32 @@ import streamlit as st
 import numpy as np
 import joblib
 
-model = joblib.load("stroke_lgbm_model.pkl")
-scaler = joblib.load("scaler.pkl")
+# Load model and scaler params
+model = joblib.load("stroke_model.pkl")
+scaler = joblib.load("scaler_params.pkl")
+
+mean = scaler["mean"]
+std = scaler["std"]
 
 st.set_page_config(page_title="Stroke Prediction App")
 
-st.title("🧠 Stroke Prediction System")
-st.write("LightGBM based ML Web App")
+st.title("🧠 Stroke Prediction App")
+st.write("ML-based Stroke Risk Prediction System")
 
 age = st.slider("Age", 1, 100, 45)
-hypertension = st.selectbox("Hypertension (0 = No, 1 = Yes)", [0, 1])
-heart_disease = st.selectbox("Heart Disease (0 = No, 1 = Yes)", [0, 1])
+hypertension = st.selectbox("Hypertension", [0, 1])
+heart_disease = st.selectbox("Heart Disease", [0, 1])
 avg_glucose = st.number_input("Average Glucose Level", 50.0, 300.0, 100.0)
 bmi = st.number_input("BMI", 10.0, 60.0, 25.0)
 
 if st.button("Predict Stroke Risk"):
-    input_data = np.array([[age, hypertension, heart_disease,
-                             avg_glucose, bmi]])
-    input_scaled = scaler.transform(input_data)
-    prediction = model.predict(input_scaled)
+    X = np.array([[age, hypertension, heart_disease,
+                   avg_glucose, bmi]])
+    X_scaled = (X - mean) / std
+    prediction = model.predict(X_scaled)
 
     if prediction[0] == 1:
         st.error("⚠ High Risk of Stroke")
     else:
         st.success("✅ Low Risk of Stroke")
+
