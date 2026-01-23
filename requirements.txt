@@ -1,8 +1,5 @@
-streamlit==1.30.0
+streamlit
 numpy
-pandas 
-scikit-learn
 joblib
-lightbgm
-
-
+scikit-learn
+lightgbm==4.1.0
